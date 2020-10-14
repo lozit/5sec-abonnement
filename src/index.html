@@ -158,7 +158,7 @@
 
   const handleUserStateChange = (user) => {
     updateUserInfo(user);
-    loadSubscriptionContent(user);
+    //loadSubscriptionContent(user);
   };
   netlifyIdentity.on("init", handleUserStateChange);
   netlifyIdentity.on("login", handleUserStateChange);
