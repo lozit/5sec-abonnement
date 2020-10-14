@@ -111,7 +111,17 @@
       });
       b2.innerText = "Mes abonnements";
       b2.addEventListener("click", () => {
-        // TODO handle subscription management
+        fetch("/.netlify/functions/create-manage-link", {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${user.token.access_token}`,
+          },
+        })
+          .then((res) => res.json())
+          .then((link) => {
+            window.location.href = link;
+          })
+          .catch((err) => console.error(err));
       });
     } else {
       // if no one is logged in, show login/signup options
