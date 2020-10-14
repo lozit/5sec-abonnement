@@ -14,22 +14,26 @@
 
   .user-info button {
     background: var(--dark-gray);
+    font-size: 1rem;
+    font-weight: 500;
+    text-transform: uppercase;
     border: 0;
     border-radius: 0.5rem;
     color: var(--white);
     display: block;
     font-family: var(--font-family);
-    font-size: 1.5rem;
-    font-weight: 900;
     padding: 1rem;
     text-align: center;
     text-decoration: none;
   }
 
-  .corgi-content {
-    display: grid;
-    gap: 1rem;
-    grid-template-columns: repeat(3, 1fr);
+  .info-content {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .content {
+    width: 100%;
   }
 
   .content h2 {
@@ -49,26 +53,29 @@
   .content img {
     width: 100%;
   }
+
+  button {
+    cursor: pointer;
+  }
 </style>
 
-<h1>Sign Up for Premium Corgi Content</h1>
+<h1>Cinq Secondes</h1>
 
 <div class="user-info">
   <button id="left">Se connecter</button>
   <button id="right">S'abonner</button>
 </div>
 
-<div class="corgi-content">
+<div class="info-content"></div>
+
+<div class="info-content">
   <div class="content">
-    <h2>Free Content</h2>
     <div class="free"></div>
   </div>
   <div class="content">
-    <h2>Pro Content</h2>
     <div class="pro"></div>
   </div>
   <div class="content">
-    <h2>Premium Content</h2>
     <div class="premium"></div>
   </div>
 </div>
@@ -138,7 +145,7 @@
   const loadSubscriptionContent = async (user) => {
     const token = user ? await netlifyIdentity.currentUser().jwt(true) : false;
 
-    ["free", "pro", "premium"].forEach((type) => {
+    ["free", "abonne"].forEach((type) => {
       fetch("/.netlify/functions/get-protected-content", {
         method: "POST",
         headers: {
